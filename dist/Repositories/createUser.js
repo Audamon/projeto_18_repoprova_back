@@ -35,19 +35,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 exports.createUser = void 0;
 var typeorm_1 = require("typeorm");
-// import UserEntity from '../Entities/userEntity';
-// import { Users } from '../Interfaces/userInterface';
+var userEntity_1 = __importDefault(require("../Entities/userEntity"));
 function createUser(email, encryptedPassword, name) {
     return __awaiter(this, void 0, void 0, function () {
-        var user;
+        var t, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     console.log(6);
-                    return [4 /*yield*/, (0, typeorm_1.getManager)().query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETUIRNING*;', [name, encryptedPassword, email])];
+                    t = {
+                        email: email,
+                        password: encryptedPassword,
+                        name: name
+                    };
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).insert(t)];
                 case 1:
                     user = _a.sent();
                     return [2 /*return*/, user];

@@ -43,6 +43,7 @@ var typeorm_1 = require("typeorm");
 // ) {
 //   process.env.DATABASE_URL += '?sslmode=require';
 // }
+var ssl = '?ssl=true';
 function connect() {
     return __awaiter(this, void 0, void 0, function () {
         var connectionManager, connection;
@@ -54,7 +55,7 @@ function connect() {
                     connection = connectionManager.create({
                         name: 'default',
                         type: 'postgres',
-                        url: process.env.DATABASE_URL,
+                        url: process.env.DATABASE_URL + ssl,
                         entities: [
                             "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/Entities/*.*"),
                         ],

@@ -58,7 +58,7 @@ exports.__esModule = true;
 exports.createUser = void 0;
 var createUserRepository = __importStar(require("../Repositories/createUser"));
 var encryptPasswordService = __importStar(require("./encryptPassword"));
-function createUser(email, password, name) {
+function createUser(name, email, password) {
     return __awaiter(this, void 0, void 0, function () {
         var encryptedPassword, user;
         return __generator(this, function (_a) {

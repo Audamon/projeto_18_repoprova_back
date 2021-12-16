@@ -3,9 +3,9 @@ import * as createUserRepository from '../Repositories/createUser';
 import * as encryptPasswordService from './encryptPassword';
 
 export async function createUser(
+  name: string,
   email: string,
   password: string,
-  name: string,
 ): Promise<Users> {
   console.log(3);
   const encryptedPassword = await encryptPasswordService.encryptPassword(password);

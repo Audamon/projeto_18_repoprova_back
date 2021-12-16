@@ -6,7 +6,7 @@ export async function createUser(
   email: string,
   password: string,
   name: string,
-): Promise<Users[]> {
+): Promise<Users> {
   console.log(3);
   const encryptedPassword = await encryptPasswordService.encryptPassword(password);
   console.log(4);

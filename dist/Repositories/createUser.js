@@ -1,23 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -58,36 +39,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 exports.__esModule = true;
-exports.init = void 0;
-require("./setup");
-var express_1 = __importDefault(require("express"));
-var cors_1 = __importDefault(require("cors"));
-require("reflect-metadata");
-var database_1 = __importDefault(require("./database"));
-var createUserController = __importStar(require("./Controllers/createUser"));
-var app = (0, express_1["default"])();
-app.use((0, cors_1["default"])());
-app.use(express_1["default"].json());
-app.post('/signup', createUserController.createUser);
-app.post('/login');
-app.get('/test/professor');
-app.get('/test/professor/type');
-app.get('/test/period');
-app.get('/test/period/subject');
-app.get('/test/period/subject/type');
-app.post('/test');
-app["delete"]('/logout');
-function init() {
+exports.createUser = void 0;
+var typeorm_1 = require("typeorm");
+var userEntity_1 = __importDefault(require("../Entities/userEntity"));
+// import { Users } from '../Interfaces/userInterface';
+function createUser(email, encryptedPassword, name) {
     return __awaiter(this, void 0, void 0, function () {
+        var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, database_1["default"])()];
+                case 0: return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).query('SELECT * FROM users;')];
                 case 1:
-                    _a.sent();
-                    return [2 /*return*/];
+                    user = _a.sent();
+                    console.log(email, encryptedPassword, name);
+                    console.log(process.env.DATABASE_URL);
+                    return [2 /*return*/, user];
             }
         });
     });
 }
-exports.init = init;
-exports["default"] = app;
+exports.createUser = createUser;

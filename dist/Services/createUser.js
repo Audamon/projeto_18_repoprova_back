@@ -54,40 +54,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 exports.__esModule = true;
-exports.init = void 0;
-require("./setup");
-var express_1 = __importDefault(require("express"));
-var cors_1 = __importDefault(require("cors"));
-require("reflect-metadata");
-var database_1 = __importDefault(require("./database"));
-var createUserController = __importStar(require("./Controllers/createUser"));
-var app = (0, express_1["default"])();
-app.use((0, cors_1["default"])());
-app.use(express_1["default"].json());
-app.post('/signup', createUserController.createUser);
-app.post('/login');
-app.get('/test/professor');
-app.get('/test/professor/type');
-app.get('/test/period');
-app.get('/test/period/subject');
-app.get('/test/period/subject/type');
-app.post('/test');
-app["delete"]('/logout');
-function init() {
+exports.createUser = void 0;
+var createUserRepository = __importStar(require("../Repositories/createUser"));
+var encryptPasswordService = __importStar(require("./encryptPassword"));
+function createUser(email, password, name) {
     return __awaiter(this, void 0, void 0, function () {
+        var encryptedPassword, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, database_1["default"])()];
+                case 0: return [4 /*yield*/, encryptPasswordService.encryptPassword(password)];
                 case 1:
-                    _a.sent();
-                    return [2 /*return*/];
+                    encryptedPassword = _a.sent();
+                    return [4 /*yield*/, createUserRepository.createUser(email, encryptedPassword, name)];
+                case 2:
+                    user = _a.sent();
+                    return [2 /*return*/, user];
             }
         });
     });
 }
-exports.init = init;
-exports["default"] = app;
+exports.createUser = createUser;

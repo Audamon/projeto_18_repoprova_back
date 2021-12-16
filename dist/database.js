@@ -59,7 +59,9 @@ function connect() {
                         entities: [
                             "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/entities/*.*"),
                         ],
-                        ssl: process.env.NODE_ENV === 'production'
+                        ssl: {
+                            rejectUnauthorized: false
+                        }
                     });
                     return [4 /*yield*/, connection.connect()];
                 case 2:

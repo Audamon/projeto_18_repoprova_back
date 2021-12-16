@@ -16,7 +16,9 @@ export default async function connect() {
     entities: [
       `${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/entities/*.*`,
     ],
-    ssl: process.env.NODE_ENV === 'production',
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
   await connection.connect();
   return connection;

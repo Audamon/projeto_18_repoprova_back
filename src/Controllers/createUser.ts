@@ -9,6 +9,6 @@ export async function createUser(req: Request, res: Response) {
     return res.status(201).send(user);
   } catch (error) {
     console.log(error);
-    return res.sendStatus(500);
+    return res.sendStatus(500).send(error);
   }
 }

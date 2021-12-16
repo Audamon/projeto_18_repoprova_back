@@ -54,7 +54,7 @@ function connect() {
                         type: 'postgres',
                         url: process.env.DATABASE_URL,
                         entities: [
-                            "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/entities/*.*"),
+                            "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/Entities/*.*"),
                         ],
                         extra: {
                             ssl: true

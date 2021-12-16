@@ -6,7 +6,7 @@ import { getConnectionManager } from 'typeorm';
 // ) {
 //   process.env.DATABASE_URL += '?sslmode=require';
 // }
-
+console.log(process.env.DATABASE_URL);
 export default async function connect() {
   const connectionManager = await getConnectionManager();
   const connection = connectionManager.create({

@@ -54,9 +54,12 @@ function createUser(email, encryptedPassword, name) {
                         password: encryptedPassword,
                         name: name
                     };
-                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).insert(t)];
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).create(t)];
                 case 1:
                     user = _a.sent();
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).save(user)];
+                case 2:
+                    _a.sent();
                     return [2 /*return*/, user];
             }
         });

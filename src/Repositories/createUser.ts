@@ -9,6 +9,7 @@ export async function createUser(email: string, encryptedPassword: string, name:
     password: encryptedPassword,
     name,
   } as Users;
-  const user = await getRepository(UserEntity).insert(t);
+  const user = await getRepository(UserEntity).create(t);
+  await getRepository(UserEntity).save(user);
   return user;
 }

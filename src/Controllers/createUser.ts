@@ -8,6 +8,7 @@ export async function createUser(req: Request, res: Response) {
     const user = await createUserService.createUser(name, email, password);
     return res.status(201).send(user);
   } catch (error) {
+    console.log(error);
     return res.sendStatus(500);
   }
 }

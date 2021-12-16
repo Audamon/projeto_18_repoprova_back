@@ -73,6 +73,7 @@ function createUser(req, res) {
                     return [2 /*return*/, res.status(201).send(user)];
                 case 3:
                     error_1 = _b.sent();
+                    console.log(error_1);
                     return [2 /*return*/, res.sendStatus(500)];
                 case 4: return [2 /*return*/];
             }

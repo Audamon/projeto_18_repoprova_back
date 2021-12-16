@@ -23,6 +23,6 @@ var app_1 = __importStar(require("./app"));
 var port = +process.env.PORT || 4000;
 (0, app_1.init)().then(function () {
     app_1["default"].listen(port, function () {
-        console.log("Server is listening on port ".concat(port, "."));
+        console.log("Server is listening on port ".concat(port, ". ").concat(process.env.DATABASE_URL));
     });
 });

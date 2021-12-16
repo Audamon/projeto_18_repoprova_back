@@ -67,9 +67,11 @@ function createUser(req, res) {
                     _b.label = 1;
                 case 1:
                     _b.trys.push([1, 3, , 4]);
+                    console.log(1);
                     return [4 /*yield*/, createUserService.createUser(name, email, password)];
                 case 2:
                     user = _b.sent();
+                    console.log(2);
                     return [2 /*return*/, res.status(201).send(user)];
                 case 3:
                     error_1 = _b.sent();

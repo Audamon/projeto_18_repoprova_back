@@ -48,7 +48,9 @@ function createUser(email, encryptedPassword, name) {
         var user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETUIRNING*;', [name, encryptedPassword, email])];
+                case 0:
+                    console.log(6);
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).query('INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETUIRNING*;', [name, encryptedPassword, email])];
                 case 1:
                     user = _a.sent();
                     console.log(email, encryptedPassword, name);

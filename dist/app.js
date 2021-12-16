@@ -68,16 +68,15 @@ var createUserController = __importStar(require("./Controllers/createUser"));
 var app = (0, express_1["default"])();
 app.use((0, cors_1["default"])());
 app.use(express_1["default"].json());
-console.log(0);
 app.post('/signup', createUserController.createUser);
-// app.post('/login');
-// app.get('/test/professor');
-// app.get('/test/professor/type');
-// app.get('/test/period');
-// app.get('/test/period/subject');
-// app.get('/test/period/subject/type');
-// app.post('/test');
-// app.delete('/logout');
+app.post('/login');
+app.get('/test/professor');
+app.get('/test/professor/type');
+app.get('/test/period');
+app.get('/test/period/subject');
+app.get('/test/period/subject/type');
+app.post('/test');
+app["delete"]('/logout');
 function init() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {

@@ -1,10 +1,14 @@
 import { getRepository } from 'typeorm';
 import UserEntity from '../Entities/userEntity';
-// import { Users } from '../Interfaces/userInterface';
+import { Users } from '../Interfaces/userInterface';
 
 export async function createUser(email: string, encryptedPassword: string, name: string) {
-  const user = await getRepository(UserEntity).query('SELECT * FROM users;');
-  console.log(email, encryptedPassword, name);
-  console.log(process.env.DATABASE_URL);
+  const data = {
+    email,
+    password: encryptedPassword,
+    name,
+  } as Users;
+  const user = await getRepository(UserEntity).create(data);
+  await getRepository(UserEntity).save(user);
   return user;
 }

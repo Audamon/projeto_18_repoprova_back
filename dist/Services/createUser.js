@@ -56,19 +56,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 exports.createUser = void 0;
+// import { Users } from '../Interfaces/userInterface';
 var createUserRepository = __importStar(require("../Repositories/createUser"));
 var encryptPasswordService = __importStar(require("./encryptPassword"));
-function createUser(email, password, name) {
+function createUser(name, email, password) {
     return __awaiter(this, void 0, void 0, function () {
         var encryptedPassword, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, encryptPasswordService.encryptPassword(password)];
+                case 0:
+                    console.log(3);
+                    return [4 /*yield*/, encryptPasswordService.encryptPassword(password)];
                 case 1:
                     encryptedPassword = _a.sent();
+                    console.log(4);
                     return [4 /*yield*/, createUserRepository.createUser(email, encryptedPassword, name)];
                 case 2:
                     user = _a.sent();
+                    console.log(5);
                     return [2 /*return*/, user];
             }
         });

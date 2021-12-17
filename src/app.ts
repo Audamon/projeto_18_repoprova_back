@@ -5,13 +5,14 @@ import 'reflect-metadata';
 
 import connectDatabase from './database';
 import * as createUserController from './Controllers/createUser';
+import * as loginUserController from './Controllers/loginUser';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 app.post('/signup', createUserController.createUser);
-app.post('/login');
+app.post('/login', loginUserController.loginUser);
 app.get('/test/professor');
 app.get('/test/professor/type');
 app.get('/test/period');

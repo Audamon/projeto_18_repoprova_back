@@ -42,17 +42,24 @@ exports.__esModule = true;
 exports.createUser = void 0;
 var typeorm_1 = require("typeorm");
 var userEntity_1 = __importDefault(require("../Entities/userEntity"));
-// import { Users } from '../Interfaces/userInterface';
 function createUser(email, encryptedPassword, name) {
     return __awaiter(this, void 0, void 0, function () {
-        var user;
+        var t, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).query('SELECT * FROM users;')];
+                case 0:
+                    console.log(6);
+                    t = {
+                        email: email,
+                        password: encryptedPassword,
+                        name: name
+                    };
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).create(t)];
                 case 1:
                     user = _a.sent();
-                    console.log(email, encryptedPassword, name);
-                    console.log(process.env.DATABASE_URL);
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).save(user)];
+                case 2:
+                    _a.sent();
                     return [2 /*return*/, user];
             }
         });

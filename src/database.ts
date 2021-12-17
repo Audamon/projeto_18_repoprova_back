@@ -7,6 +7,7 @@ if (
   process.env.DATABASE_URL += '?sslmode=require';
 }
 
+// const ssl ='?ssl=true';
 export default async function connect() {
   const connectionManager = await getConnectionManager();
   const connection = connectionManager.create({
@@ -14,9 +15,8 @@ export default async function connect() {
     type: 'postgres',
     url: process.env.DATABASE_URL,
     entities: [
-      `${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/entities/*.*`,
+      `${process.env.NODE_ENV === 'production' ? 'dist' : 'src'}/Entities/*.*`,
     ],
-    ssl: process.env.NODE_ENV === 'production',
   });
   await connection.connect();
   return connection;

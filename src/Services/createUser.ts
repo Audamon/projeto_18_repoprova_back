@@ -7,10 +7,7 @@ export async function createUser(
   email: string,
   password: string,
 ) {
-  console.log(3);
   const encryptedPassword = await encryptPasswordService.encryptPassword(password);
-  console.log(4);
   const user = await createUserRepository.createUser(email, encryptedPassword, name);
-  console.log(5);
   return user;
 }

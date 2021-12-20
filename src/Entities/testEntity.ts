@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  JoinColumn,
+  ManyToOne,
+} from 'typeorm';
+import ProfessorEntity from './professorEntity';
 
 @Entity('test')
 export default class TestEntity {
@@ -25,4 +32,10 @@ export default class TestEntity {
 
   @Column()
     pdf: string;
+
+  @ManyToOne(() => ProfessorEntity, (professor) => professor.id, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'idProfessor' })
+    professor: ProfessorEntity;
 }

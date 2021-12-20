@@ -11,10 +11,21 @@ export async function postTest(req: Request, res: Response) {
     if (!name || !type || !subject || !professor || !url || !pdf) {
       return res.sendStatus(400);
     }
-    const test = await postTestServices.postTest(name, subject, type, professor, url, token, pdf);
+    const test = await postTestServices.postTest(
+      name,
+      subject,
+      type,
+      professor,
+      url,
+      token,
+      pdf,
+    );
+    if (!test) {
+      return res.sendStatus(400);
+    }
     return res.status(201).send(test);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     return res.sendStatus(500);
   }
 }

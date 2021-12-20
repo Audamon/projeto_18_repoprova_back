@@ -13,8 +13,21 @@ export async function postTest(
   pdf: string,
 ) {
   const idUser = await getUserIdByTokenService.getUserIdByToken(token);
-  const idProfessor = await getProfessorIdByNameService.getProfessorIdByName(professor);
+  const idProfessor = await getProfessorIdByNameService.getProfessorIdByName(
+    professor,
+  );
+  if (!idProfessor) {
+    return null;
+  }
   const idSubject = await getSubjectIdByNameService.getSubjectIdByName(subject);
-  const test = await postTestRepository.postTest(name, idSubject[0], type, idProfessor[0], url, idUser[0], pdf);
+  const test = await postTestRepository.postTest(
+    name,
+    idSubject[0],
+    type,
+    idProfessor[0],
+    url,
+    idUser[0],
+    pdf,
+  );
   return test;
 }

@@ -10,31 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 exports.__esModule = true;
 var typeorm_1 = require("typeorm");
-var UserEntity = /** @class */ (function () {
-    function UserEntity() {
+var SessionsEntity = /** @class */ (function () {
+    function SessionsEntity() {
     }
-    UserEntity.prototype.getId = function () {
-        return this.id;
+    SessionsEntity.prototype.getIdUser = function () {
+        return this.idUser;
     };
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)
-    ], UserEntity.prototype, "id");
+    ], SessionsEntity.prototype, "id");
+    __decorate([
+        (0, typeorm_1.Column)(),
+        __metadata("design:type", Number)
+    ], SessionsEntity.prototype, "idUser");
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], UserEntity.prototype, "name");
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], UserEntity.prototype, "email");
-    __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], UserEntity.prototype, "password");
-    UserEntity = __decorate([
-        (0, typeorm_1.Entity)('users')
-    ], UserEntity);
-    return UserEntity;
+    ], SessionsEntity.prototype, "token");
+    SessionsEntity = __decorate([
+        (0, typeorm_1.Entity)('sessions')
+    ], SessionsEntity);
+    return SessionsEntity;
 }());
-exports["default"] = UserEntity;
+exports["default"] = SessionsEntity;

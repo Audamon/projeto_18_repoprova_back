@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn, OneToOne} from 'typeorm';
+import {
+  Entity, PrimaryGeneratedColumn, Column, OneToMany,
+} from 'typeorm';
 import { Professors } from '../Interfaces/professorInterface';
 import TestEntity from './testEntity';
 
@@ -13,7 +15,7 @@ export default class ProfessorEntity implements Professors {
   @Column()
     qtd: number;
 
-  @OneToOne(() => TestEntity, (test) => test.professor)
+  @OneToMany(() => TestEntity, (test) => test.professor)
     tests: TestEntity;
 
   getId() {

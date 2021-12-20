@@ -6,6 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import ProfessorEntity from './professorEntity';
+import SubjectEntity from './subjectEntity';
 
 @Entity('test')
 export default class TestEntity {
@@ -38,4 +39,42 @@ export default class TestEntity {
   })
   @JoinColumn({ name: 'idProfessor' })
     professor: ProfessorEntity;
+
+  @ManyToOne(() => SubjectEntity, (subject) => subject.id, {
+    eager: true,
+  })
+  @JoinColumn({ name: 'idSubject' })
+    subject: SubjectEntity;
+
+  getTestsByProfessor() {
+    return {
+      id: this.id,
+      name: this.name,
+      type: this.type,
+      url: this.url,
+      professor: {
+        name: this.professor.name,
+      },
+      subject: {
+        name: this.subject.name,
+        period: this.subject.period.name,
+      },
+    };
+  }
+
+  getTestsBySubject() {
+    return {
+      id: this.id,
+      name: this.name,
+      type: this.type,
+      url: this.url,
+      professor: {
+        name: this.professor.name,
+      },
+      subject: {
+        name: this.subject.name,
+        period: this.subject.period.name,
+      },
+    };
+  }
 }

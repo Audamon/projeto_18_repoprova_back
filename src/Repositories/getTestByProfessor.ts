@@ -5,5 +5,5 @@ export async function getTestsByProfessor(idProfessor: number) {
   const tests = await getRepository(TestEntity).find({
     where: { idProfessor },
   });
-  return tests;
+  return tests.map((test) => test.getTestsByProfessor());
 }

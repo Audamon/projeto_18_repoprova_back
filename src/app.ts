@@ -6,6 +6,7 @@ import 'reflect-metadata';
 import connectDatabase from './database';
 import * as createUserController from './Controllers/createUser';
 import * as loginUserController from './Controllers/loginUser';
+import * as logoutUserController from './Controllers/logoutUser';
 
 const app = express();
 app.use(cors());
@@ -20,7 +21,7 @@ app.get('/test/period/subject');
 app.get('/test/period/subject/type');
 
 app.post('/test');
-app.delete('/logout');
+app.delete('/logout', logoutUserController.logoutUser);
 
 export async function init() {
   await connectDatabase();

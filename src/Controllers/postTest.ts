@@ -8,7 +8,7 @@ export async function postTest(req: Request, res: Response) {
   }: Tests = req.body;
   const token: string = req.headers.authorization.replace('Bearer ', '');
   try {
-    if (!name || !type || !subject || !professor || !url || !pdf) {
+    if (!name || !type || !subject || !professor || !url) {
       return res.sendStatus(400);
     }
     const test = await postTestServices.postTest(

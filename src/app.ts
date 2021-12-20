@@ -14,6 +14,7 @@ import * as getTestSByProfessorController from './Controllers/getTestsByProfesso
 import * as getPeriodsController from './Controllers/getPeriods';
 import * as getSubjectsByPeriodController from './Controllers/getSubjectsbyPeriod';
 import * as getTestsBySubjectController from './Controllers/getTestsBySubject';
+import * as getSubjectsController from './Controllers/getSubjects';
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,7 @@ app.get('/test/period', userAuthorizationMiddleware.userAuthorization, getPeriod
 app.get('/test/period/subject/:id', userAuthorizationMiddleware.userAuthorization, getSubjectsByPeriodController.getSubjectsByPeriod);
 app.get('/test/period/subject/type/:id', userAuthorizationMiddleware.userAuthorization, getTestsBySubjectController.getTestsBySubject);
 
+app.get('/test/subject/:professor', userAuthorizationMiddleware.userAuthorization, getSubjectsController.getSubjects);
 app.post('/test', userAuthorizationMiddleware.userAuthorization, postTestController.postTest);
 app.delete('/logout', logoutUserController.logoutUser);
 

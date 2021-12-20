@@ -8,33 +8,44 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
 var typeorm_1 = require("typeorm");
-var UserEntity = /** @class */ (function () {
-    function UserEntity() {
+var testEntity_1 = __importDefault(require("./testEntity"));
+var ProfessorEntity = /** @class */ (function () {
+    function ProfessorEntity() {
     }
-    UserEntity.prototype.getId = function () {
+    ProfessorEntity.prototype.getId = function () {
         return this.id;
+    };
+    ProfessorEntity.prototype.getProfessors = function () {
+        return {
+            id: this.id,
+            name: this.name,
+            qtd: this.qtd
+        };
     };
     __decorate([
         (0, typeorm_1.PrimaryGeneratedColumn)(),
         __metadata("design:type", Number)
-    ], UserEntity.prototype, "id");
+    ], ProfessorEntity.prototype, "id");
     __decorate([
         (0, typeorm_1.Column)(),
         __metadata("design:type", String)
-    ], UserEntity.prototype, "name");
+    ], ProfessorEntity.prototype, "name");
     __decorate([
         (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], UserEntity.prototype, "email");
+        __metadata("design:type", Number)
+    ], ProfessorEntity.prototype, "qtd");
     __decorate([
-        (0, typeorm_1.Column)(),
-        __metadata("design:type", String)
-    ], UserEntity.prototype, "password");
-    UserEntity = __decorate([
-        (0, typeorm_1.Entity)('users')
-    ], UserEntity);
-    return UserEntity;
+        (0, typeorm_1.OneToMany)(function () { return testEntity_1["default"]; }, function (test) { return test.professor; }),
+        __metadata("design:type", testEntity_1["default"])
+    ], ProfessorEntity.prototype, "tests");
+    ProfessorEntity = __decorate([
+        (0, typeorm_1.Entity)('professors')
+    ], ProfessorEntity);
+    return ProfessorEntity;
 }());
-exports["default"] = UserEntity;
+exports["default"] = ProfessorEntity;

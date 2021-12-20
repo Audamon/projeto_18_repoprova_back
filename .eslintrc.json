@@ -25,6 +25,7 @@
     "import/prefer-default-export": 0,
     "no-nested-ternary":"off",
     "max-len":"off",
-    "no-console": 0
+    "no-console": 0,
+    "consistent-return":"off"
     }
 }

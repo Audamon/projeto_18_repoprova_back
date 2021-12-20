@@ -35,35 +35,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 exports.__esModule = true;
-var typeorm_1 = require("typeorm");
-if (process.env.NODE_ENV === 'production'
-    && process.env.DATABASE_URL.indexOf('sslmode=require') === -1) {
-    process.env.DATABASE_URL += '?sslmode=require';
-}
-// const ssl ='?ssl=true';
-function connect() {
+exports.checkPassword = void 0;
+var bcrypt_1 = __importDefault(require("bcrypt"));
+function checkPassword(password, user) {
     return __awaiter(this, void 0, void 0, function () {
-        var connectionManager, connection;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, typeorm_1.getConnectionManager)()];
-                case 1:
-                    connectionManager = _a.sent();
-                    connection = connectionManager.create({
-                        name: 'default',
-                        type: 'postgres',
-                        url: process.env.DATABASE_URL,
-                        entities: [
-                            "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/Entities/*.*"),
-                        ]
-                    });
-                    return [4 /*yield*/, connection.connect()];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/, connection];
+            if (!bcrypt_1["default"].compareSync(password, user)) {
+                return [2 /*return*/, null];
             }
+            return [2 /*return*/, password];
         });
     });
 }
-exports["default"] = connect;
+exports.checkPassword = checkPassword;

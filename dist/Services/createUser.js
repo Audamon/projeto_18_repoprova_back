@@ -64,16 +64,12 @@ function createUser(name, email, password) {
         var encryptedPassword, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    console.log(3);
-                    return [4 /*yield*/, encryptPasswordService.encryptPassword(password)];
+                case 0: return [4 /*yield*/, encryptPasswordService.encryptPassword(password)];
                 case 1:
                     encryptedPassword = _a.sent();
-                    console.log(4);
                     return [4 /*yield*/, createUserRepository.createUser(email, encryptedPassword, name)];
                 case 2:
                     user = _a.sent();
-                    console.log(5);
                     return [2 /*return*/, user];
             }
         });

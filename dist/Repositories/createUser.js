@@ -44,17 +44,16 @@ var typeorm_1 = require("typeorm");
 var userEntity_1 = __importDefault(require("../Entities/userEntity"));
 function createUser(email, encryptedPassword, name) {
     return __awaiter(this, void 0, void 0, function () {
-        var t, user;
+        var data, user;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    console.log(6);
-                    t = {
+                    data = {
                         email: email,
                         password: encryptedPassword,
                         name: name
                     };
-                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).create(t)];
+                    return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).create(data)];
                 case 1:
                     user = _a.sent();
                     return [4 /*yield*/, (0, typeorm_1.getRepository)(userEntity_1["default"]).save(user)];

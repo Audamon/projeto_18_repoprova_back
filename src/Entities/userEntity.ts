@@ -14,4 +14,8 @@ export default class UserEntity implements Users {
 
   @Column()
     password: string;
+
+  getId() {
+    return this.id;
+  }
 }

@@ -64,19 +64,28 @@ var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 require("reflect-metadata");
 var database_1 = __importDefault(require("./database"));
+var userAuthorizationMiddleware = __importStar(require("./Middleware/userAuthorization"));
 var createUserController = __importStar(require("./Controllers/createUser"));
+var loginUserController = __importStar(require("./Controllers/loginUser"));
+var logoutUserController = __importStar(require("./Controllers/logoutUser"));
+var postTestController = __importStar(require("./Controllers/postTest"));
+var getProfessorsController = __importStar(require("./Controllers/getProfessors"));
+var getTestSByProfessorController = __importStar(require("./Controllers/getTestsByProfessor"));
+var getPeriodsController = __importStar(require("./Controllers/getPeriods"));
+var getSubjectsByPeriodController = __importStar(require("./Controllers/getSubjectsbyPeriod"));
+var getTestsBySubjectController = __importStar(require("./Controllers/getTestsBySubject"));
 var app = (0, express_1["default"])();
 app.use((0, cors_1["default"])());
 app.use(express_1["default"].json());
 app.post('/signup', createUserController.createUser);
-app.post('/login');
-app.get('/test/professor');
-app.get('/test/professor/type');
-app.get('/test/period');
-app.get('/test/period/subject');
-app.get('/test/period/subject/type');
-app.post('/test');
-app["delete"]('/logout');
+app.post('/login', loginUserController.loginUser);
+app.get('/test/professor', userAuthorizationMiddleware.userAuthorization, getProfessorsController.getProfessors);
+app.get('/test/professor/type/:id', userAuthorizationMiddleware.userAuthorization, getTestSByProfessorController.getTestsByProfessor);
+app.get('/test/period', userAuthorizationMiddleware.userAuthorization, getPeriodsController.getPeriods);
+app.get('/test/period/subject/:id', userAuthorizationMiddleware.userAuthorization, getSubjectsByPeriodController.getSubjectsByPeriod);
+app.get('/test/period/subject/type/:id', userAuthorizationMiddleware.userAuthorization, getTestsBySubjectController.getTestsBySubject);
+app.post('/test', userAuthorizationMiddleware.userAuthorization, postTestController.postTest);
+app["delete"]('/logout', logoutUserController.logoutUser);
 function init() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {

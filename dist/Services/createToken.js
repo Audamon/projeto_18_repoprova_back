@@ -36,34 +36,19 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var typeorm_1 = require("typeorm");
-if (process.env.NODE_ENV === 'production'
-    && process.env.DATABASE_URL.indexOf('sslmode=require') === -1) {
-    process.env.DATABASE_URL += '?sslmode=require';
-}
-// const ssl ='?ssl=true';
-function connect() {
+exports.createToken = void 0;
+var uuid_1 = require("uuid");
+function createToken() {
     return __awaiter(this, void 0, void 0, function () {
-        var connectionManager, connection;
+        var token;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, typeorm_1.getConnectionManager)()];
+                case 0: return [4 /*yield*/, (0, uuid_1.v4)()];
                 case 1:
-                    connectionManager = _a.sent();
-                    connection = connectionManager.create({
-                        name: 'default',
-                        type: 'postgres',
-                        url: process.env.DATABASE_URL,
-                        entities: [
-                            "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/Entities/*.*"),
-                        ]
-                    });
-                    return [4 /*yield*/, connection.connect()];
-                case 2:
-                    _a.sent();
-                    return [2 /*return*/, connection];
+                    token = _a.sent();
+                    return [2 /*return*/, token];
             }
         });
     });
 }
-exports["default"] = connect;
+exports.createToken = createToken;

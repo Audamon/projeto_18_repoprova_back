@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -36,34 +55,31 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var typeorm_1 = require("typeorm");
-if (process.env.NODE_ENV === 'production'
-    && process.env.DATABASE_URL.indexOf('sslmode=require') === -1) {
-    process.env.DATABASE_URL += '?sslmode=require';
-}
-// const ssl ='?ssl=true';
-function connect() {
+exports.loginUser = void 0;
+var loginUserService = __importStar(require("../Services/loginUser"));
+function loginUser(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var connectionManager, connection;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, (0, typeorm_1.getConnectionManager)()];
+        var _a, email, password, token, error_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0:
+                    _a = req.body, email = _a.email, password = _a.password;
+                    _b.label = 1;
                 case 1:
-                    connectionManager = _a.sent();
-                    connection = connectionManager.create({
-                        name: 'default',
-                        type: 'postgres',
-                        url: process.env.DATABASE_URL,
-                        entities: [
-                            "".concat(process.env.NODE_ENV === 'production' ? 'dist' : 'src', "/Entities/*.*"),
-                        ]
-                    });
-                    return [4 /*yield*/, connection.connect()];
+                    _b.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, loginUserService.loginUser(email, password)];
                 case 2:
-                    _a.sent();
-                    return [2 /*return*/, connection];
+                    token = _b.sent();
+                    if (!token) {
+                        return [2 /*return*/, res.sendStatus(401)];
+                    }
+                    return [2 /*return*/, res.status(200).send(token)];
+                case 3:
+                    error_1 = _b.sent();
+                    return [2 /*return*/, res.sendStatus(500)];
+                case 4: return [2 /*return*/];
             }
         });
     });
 }
-exports["default"] = connect;
+exports.loginUser = loginUser;

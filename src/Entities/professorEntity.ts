@@ -1,7 +1,8 @@
 import {
-  Entity, PrimaryGeneratedColumn, Column, OneToMany,
+  Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne,
 } from 'typeorm';
 import { Professors } from '../Interfaces/professorInterface';
+import SubjectEntity from './subjectEntity';
 import TestEntity from './testEntity';
 
 @Entity('professors')
@@ -17,6 +18,9 @@ export default class ProfessorEntity implements Professors {
 
   @OneToMany(() => TestEntity, (test) => test.professor)
     tests: TestEntity;
+
+  @OneToOne(() => SubjectEntity, (subject) => subject.professors)
+    subject: SubjectEntity;
 
   getId() {
     return this.id;

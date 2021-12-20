@@ -11,4 +11,8 @@ export default class SessionsEntity implements Token {
 
   @Column()
     token: string;
+
+  getIdUser() {
+    return this.idUser;
+  }
 }
